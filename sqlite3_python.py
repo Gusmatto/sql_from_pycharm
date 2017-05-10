@@ -14,6 +14,7 @@ print("")
 opc = {1: "FABRICANTES",
       2: "ARTICULOS"}
 
+
 opcion = int(input("Ingrese opción: "))
 if opcion == 4:
    c.execute('''SELECT ARTICULOS.ID, ARTICULOS.NOMBRE, ARTICULOS.PRECIO, FABRICANTES.NOMBRE
