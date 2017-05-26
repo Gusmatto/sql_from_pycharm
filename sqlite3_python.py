@@ -33,10 +33,18 @@ if opcion == 3:
    base.commit()
 
 if opcion == 5:
-    articulo = input("Ingrese articulo: ")
-    precio = input("Ingrese precio: ")
-    id_fab = input("Ingrese id de fabricante: ")
-    c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes WHERE (Nombre = ?)))', (articulo, precio, id_fab))
+    n = input("Nuevo fabricante? s/n: ")
+    if n == "s":
+        n = upper.n
+        nombre = input("Ingrese nombre: ")
+        print("Ingreso exitoso!!!")
+        c.execute('INSERT INTO Fabricantes(Nombre) VALUES("{}");'.format(nombre))
+        base.commit()
+    else:
+        articulo = input("Ingrese articulo: ")
+        precio = input("Ingrese precio: ")
+        fab = input("Ingrese fabricante: ")
+        f = c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes WHERE (Nombre = ?)))', (articulo, precio, fab))
 
 if opcion != 3:
    a = c.fetchall()
