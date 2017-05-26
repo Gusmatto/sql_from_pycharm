@@ -17,8 +17,8 @@ opc = {1: "FABRICANTES",
 
 opcion = int(input("Ingrese opción: "))
 if opcion == 4:
-   c.execute('''SELECT ARTICULOS.ID, ARTICULOS.NOMBRE, ARTICULOS.PRECIO, FABRICANTES.NOMBRE
-   FROM ARTICULOS INNER JOIN FABRICANTES ON FABRICANTES.ID = ARTICULOS.FAB''')
+   c.execute('''SELECT Articulos.id, Articulos.Nombre, Articulos.Precio, Fabricantes.Nombre
+   FROM Articulos INNER JOIN Fabricantes ON Fabricantes.id = Articulos.Fab''')
    a = c.fetchall()
    print("ID NOMBRE PRECIO FABRICANTE")
    for i in a:
@@ -29,14 +29,14 @@ if opcion < 3:
 
 if opcion == 3:
    nombre = input("Ingrese nombre: ")
-   c.execute('INSERT INTO FABRICANTES(NOMBRE) VALUES("{}");'.format(nombre))
+   c.execute('INSERT INTO Fabricantes(Nombre) VALUES("{}");'.format(nombre))
    base.commit()
 
 if opcion == 5:
     articulo = input("Ingrese articulo: ")
     precio = input("Ingrese precio: ")
     id_fab = input("Ingrese id de fabricante: ")
-    c.execute('INSERT INTO ARTICULOS VALUES(?, ?, ?)', (articulo, precio, id_fab))
+    c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes WHERE (Nombre = ?)))', (articulo, precio, id_fab))
 
 if opcion != 3:
    a = c.fetchall()
