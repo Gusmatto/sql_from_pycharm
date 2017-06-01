@@ -37,6 +37,7 @@ def menu():
         print("ID NOMBRE PRECIO FABRICANTE")
         for i in a:
             print(i[0], i[1], i[2], i[3])
+        RegresarMenu()
 
     if opcion < 3:
         c.execute('SELECT * FROM {};'.format(opc[opcion]))
@@ -52,6 +53,7 @@ def menu():
             precio = input("Ingrese precio: ")
             fab = input("Ingrese fabricante: ")
             c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes WHERE (Nombre = ?)))', (articulo, precio, fab))
+            print("")
             print("Carga de producto, precio y fabricante exitosa!!!")
             base.commit()
         else:
@@ -60,7 +62,9 @@ def menu():
             fab = input("Ingrese fabricante: ")
             c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes WHERE (Nombre = ?)))', (articulo, precio, fab))
             print("Carga de producto, precio y fabricante exitosa!!!")
+            print("")
             base.commit()
+            RegresarMenu()
 
     if opcion != 3:
         a = c.fetchall()
@@ -72,14 +76,14 @@ def menu():
             RegresarMenu()
 
     if opcion == 2:
-
         print("ID NOMBRE PRECIO ID_FAB")
         for i in a:
             print(i[0], i[1], i[2], i[3])
 
+        RegresarMenu()
 
 
     base.commit()
-    base.close()
+
 
 menu()
