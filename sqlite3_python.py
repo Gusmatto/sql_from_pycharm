@@ -21,7 +21,7 @@ def menu():
     print("2 - Ver lista de articulos")
     print("3 - Ver lista articulos+fabricantes")
     print("4 - Ingresar articulo, precio y fabricante")
-    print("5 - Eliminar producto")
+    print("5 - Eliminar articulo o fabricante")
     print("6 - Modificar precio")
     print("")
 
@@ -52,7 +52,8 @@ def menu():
             articulo = input("Ingrese articulo: ")
             precio = input("Ingrese precio: ")
             fab = input("Ingrese fabricante: ")
-            c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes WHERE (Nombre = ?)))', (articulo, precio, fab))
+            c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes\
+                      WHERE (Nombre = ?)))', (articulo, precio, fab))
             print("")
             print("Carga de producto, precio y fabricante exitosa!!!")
             base.commit()
@@ -60,7 +61,8 @@ def menu():
             articulo = input("Ingrese articulo: ")
             precio = input("Ingrese precio: ")
             fab = input("Ingrese fabricante: ")
-            c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes WHERE (Nombre = ?)))', (articulo, precio, fab))
+            c.execute('INSERT INTO Articulos (Nombre, Precio, Fab) VALUES(?, ?, (SELECT id FROM Fabricantes\
+                      WHERE (Nombre = ?)))', (articulo, precio, fab))
             print("Carga de producto, precio y fabricante exitosa!!!")
             print("")
             base.commit()
@@ -82,7 +84,19 @@ def menu():
 
         RegresarMenu()
 
+    if opcion == 5:
+        a = input("Para eliminar producto (p) - Para eliminar fabricante (f): ")
+        if a == "p" or a == "P":
+            pro = input("Qué producto quiere borrar?: ")
+            c.execute('DELETE FROM Articulos WHERE Nombre = "{}"'.format(pro))
+            print("Producto borrado!!!")
+            RegresarMenu()
 
+        if a == "f" or a == "F":
+            fab = input("Qué fabricante quiere borrar?: ")
+            c.execute('DELETE FROM Fabricantes, Articulos WHERE Nombre = "{}"'.format(fab))
+            print("Fabricante borrado!!!")
+            RegresarMenu()
     base.commit()
 
 
